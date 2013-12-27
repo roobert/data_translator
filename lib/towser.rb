@@ -2,8 +2,8 @@
 
 require 'towser/network'
 require 'towser/network/switch'
+require 'towser/network/machine'
 require 'towser/network/machines'
-require 'towser/network/machines/machine'
 require 'towser/network/machines/interface/interface'
 require 'towser/network/switch/interface/portchannel'
 require 'towser/network/switch/interface/vlan'
