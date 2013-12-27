@@ -2,9 +2,12 @@
 
 module Towser
   class Network
-    def initialize
-      @switches = {}
-      @machines = {}
+    def initialize(switches)
+      @switches = Switches.new
+    end
+
+    def add_switches(switches)
+      @switches.add(switches)
     end
   end
 end
