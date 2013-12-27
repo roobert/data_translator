@@ -10,7 +10,7 @@ module Towser
       end
 
       def add(config)
-        @config   = config
+        @config = config
 
         objectify
       end
