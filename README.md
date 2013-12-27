@@ -1,5 +1,7 @@
-# Switch Config Parser
+# Towser
 
 ## About
 
-Tested on Dell switch configs.
+## Notes
+
+* Tested on Dell switch configs.
