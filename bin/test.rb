@@ -2,8 +2,7 @@
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '../lib'))
 
-require 'switch_config_parser/regexp/config'
-require 'switch_config_parser/regexp/bridge_table'
+require 'switch_config_parser'
 require 'towser'
 require 'awesome_print'
 require 'yaml'

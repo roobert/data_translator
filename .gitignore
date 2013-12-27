@@ -1,2 +1,3 @@
 data
 lib/switch_config_parser
+lib/switch_config_parser.rb
