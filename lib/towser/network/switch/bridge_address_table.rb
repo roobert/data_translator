@@ -3,7 +3,7 @@
 module Towser
   class Network
     class Switch
-      class BridgeTable
+      class BridgeAddressTable
         attr_reader :entries
 
         def initialize(table)
@@ -15,7 +15,7 @@ module Towser
 
         def objectify
           @table.each do |identifier, entry|
-            @entries[identifier] = Towser::Network::Switch::BridgeTable::Entry.new(identifier, entry)
+            @entries[identifier] = Towser::Network::Switch::BridgeAddressTable::Entry.new(identifier, entry)
           end
         end
 
