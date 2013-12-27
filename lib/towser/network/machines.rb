@@ -5,9 +5,12 @@ module Towser
     class Machines
       attr_accessor :config, :machines
 
-      def initialize(config)
-        @config   = config
+      def initialize
         @machines = {}
+      end
+
+      def add(config)
+        @config   = config
 
         objectify
       end

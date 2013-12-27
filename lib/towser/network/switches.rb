@@ -5,13 +5,11 @@ module Towser
     class Switches
       attr_reader :switches
 
-      def initialize(hosts)
+      def initialize
         @switches = {}
-
-        parse(hosts)
       end
 
-      def parse(hosts)
+      def add(hosts)
         hosts.each do |host|
           switch_config = SwitchDataParser::Regexp::Config.parse(File.read(File.join(CONFIG_DIR, host)))
           bridge_table  = SwitchDataParser::Regexp::BridgeAddressTable.parse(File.read(File.join(BRIDGE_TABLE_DIR, host)))
