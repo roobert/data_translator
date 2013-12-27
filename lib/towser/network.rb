@@ -4,7 +4,7 @@ module Towser
   class Network
     attr_accessor :switches, :machines
 
-    def initialize(switches)
+    def initialize
       @switches = Switches.new
       @machines = Machines.new
     end
