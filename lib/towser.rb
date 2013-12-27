@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'towser/network'
+require 'towser/network/switch'
+require 'towser/network/machines'
+require 'towser/network/machines/machine'
+require 'towser/network/machines/interface/interface'
+require 'towser/network/switch/interface/portchannel'
+require 'towser/network/switch/interface/vlan'
+require 'towser/network/switch/interface/ethernet'
+require 'towser/network/switch/interface/attribute/switchport'
+require 'towser/network/switch/parser/regexp/config'
+require 'towser/network/switch/parser/regexp/bridge_table'
+require 'towser/network/switch/config'
+require 'towser/network/switch/bridge/table'
+require 'towser/network/switch/bridge/entry'
+require 'towser/network/switch/attribute/vlans'
+require 'towser/network/switch/attribute/vlan'
