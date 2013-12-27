@@ -13,7 +13,7 @@ DATA_DIR         = File.join(File.dirname(__FILE__), '../data')
 CONFIG_DIR       = File.join(DATA_DIR, 'config')
 BRIDGE_TABLE_DIR = File.join(DATA_DIR, 'bridge_table')
 
-switches = []
+switches = ARGV
 machine_config = YAML.load_file(File.join(DATA_DIR, 'mcollective.config'))
 
 network = Network.new
