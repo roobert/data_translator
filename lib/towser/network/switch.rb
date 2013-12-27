@@ -11,7 +11,7 @@ module Towser
       end
 
       def load_bridge_table(config)
-        @bridge_table = Towser::Network::Switch::Bridge::Table.new(config)
+        @bridge_table = Towser::Network::Switch::BridgeTable.new(config)
       end
 
       # combine switch config and bridge_table data
