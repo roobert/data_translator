@@ -3,7 +3,7 @@
 module Towser
   class Network
     class Switch
-      module BridgeTable
+      class BridgeTable
         class Entry
           attr_reader :identifier, :port, :unit, :stack_member, :vlans
 
