@@ -15,11 +15,11 @@ Possibly depends on the following:
 
 ## Usage
 
-# Fetch various data from your network
-# Parse the data into hash form
-# Translate the data into ruby objects
-# View useful combinations of the data
-# Generate dashboards from data
+#. Fetch various data from your network
+#. Parse the data into hash form
+#. Translate the data into ruby objects
+#. View useful combinations of the data
+#. Generate dashboards from data
 
 ## Example
 
