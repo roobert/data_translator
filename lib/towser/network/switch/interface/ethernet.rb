@@ -18,12 +18,12 @@ module Towser
 
           def to_hash
             {
-              :identifier => @identifier,
-              :description => @description,
+              :identifier   => @identifier,
+              :description  => @description,
               :stack_member => @stack_member,
-              :port => @port,
-              :unit => @unit,
-              :switchport => @switchport,
+              :port         => @port,
+              :unit         => @unit,
+              :switchport   => @switchport,
             }
           end
 

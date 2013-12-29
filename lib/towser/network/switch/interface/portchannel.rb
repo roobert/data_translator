@@ -16,10 +16,10 @@ module Towser
 
           def to_hash
             {
-              :identifier => identifier,
+              :identifier  => identifier,
               :description => description,
-              :channel => channel,
-              :switchport => switchport.to_hash,
+              :channel     => channel,
+              :switchport  => switchport.to_hash,
             }
           end
 

@@ -15,9 +15,9 @@ module Towser
 
           def to_hash
             {
-              :identifier => identifier,
+              :identifier  => identifier,
               :description => description,
-              :vlan => vlan
+              :vlan        => vlan
             }
           end
 

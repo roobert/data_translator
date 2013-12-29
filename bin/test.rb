@@ -22,7 +22,7 @@ network.add_switches(switches)
 network.add_machines(machine_config)
 
 # this is probably an awful thing to do..
-network.associate_machine_interfaces_with_switch_ports
-network.associate_switch_port_mac_addresses_with_machine_interfaces
+#network.associate_machine_interfaces_with_switch_ports
+#network.associate_switch_port_mac_addresses_with_machine_interfaces
 
 puts network.to_hash.to_yaml
