@@ -9,30 +9,18 @@ module Towser
             attr_reader :mode, :added, :removed, :acceptable_frame_type
 
             def initialize(switchport)
-              @mode = switchport[:mode]
-              unless switchport[:vlans].nil?
-                unless switchport[:vlans][:add].nil?
-                  @added = Towser::Network::Switch::Attribute::Vlans.new(switchport[:vlans][:add])
-                end
-                unless switchport[:vlans][:remove].nil?
-                  @removed = Towser::Network::Switch::Attribute::Vlans.new(switchport[:vlans][:remove])
-                end
-              end
+              objectify(switchport)
+            end
 
+            def objectify(switchport)
+              @mode                  = switchport[:mode]
               @acceptable_frame_type = switchport[:acceptable_frame_type]
-            end
 
-            def to_hash
-              {
-                :mode => mode,
-                :added => added,
-                :removed => removed,
-                :acceptable_frame_type => acceptable_frame_type,
-              }
-            end
+              return if switchport[:vlans].nil?
 
-            alias_method :inspect, :to_hash
-            alias_method :to_s, :to_hash
+              @added   = Towser::Network::Switch::Attribute::Vlans.new(switchport[:vlans][:add]) unless switchport[:vlans][:add].nil?
+              @removed = Towser::Network::Switch::Attribute::Vlans.new(switchport[:vlans][:remove]) unless switchport[:vlans][:remove].nil?
+            end
           end
         end
       end

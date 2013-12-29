@@ -7,26 +7,24 @@ module Towser
         class Vlans
           attr_accessor :vlans
 
-          def initialize(vlans)
-            @vlans = {}
+          def initialize(data)
+            objectify(data)
+          end
 
-            vlans.each do |vlan, macs|
-              @vlans[vlan.to_i] = Switch::Attribute::Vlan.new(vlan, macs)
+          def objectify(data)
+            @vlans ||= []
+            data.each do |vlan, macs|
+              @vlans.push Switch::Attribute::Vlan.new(vlan, macs)
             end
           end
 
+          def [](n)
+            @vlans[n]
+          end
+
           def each
-            @vlans.each { |vlan,macs| yield vlan, macs }
+            @vlans.each { |vlan| yield vlan }
           end
-
-          def to_hash
-            {
-              :vlans => vlans.to_hash
-            }
-          end
-
-          alias_method :inspect, :to_hash
-          alias_method :to_s, :to_hash
         end
       end
     end

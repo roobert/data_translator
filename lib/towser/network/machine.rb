@@ -4,27 +4,20 @@ module Towser
   class Network
     class Machines
       class Machine
-        attr_accessor :mac_address, :interfaces
+        attr_accessor :identifier, :interfaces
 
-        def initialize(data)
-          @data       = data
-          @interfaces = {}
+        def initialize(identifier, config)
+          @identifier = identifier
+          @interfaces = []
 
-          objectify
+          objectify(config)
         end
 
-        def objectify
-          @data.each do |interface, data|
-            @interfaces[interface] = Interface.new(data)
+        def objectify(config)
+          config.each do |identifier, data|
+            @interfaces.push Interface.new(identifier, data)
           end
         end
-
-        def to_hash
-          { :interfaces => interfaces }
-        end
-
-        alias_method :inspect, :to_hash
-        alias_method :to_s, :to_hash
       end
     end
   end

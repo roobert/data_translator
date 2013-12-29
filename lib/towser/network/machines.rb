@@ -6,32 +6,30 @@ module Towser
       attr_accessor :config, :machines
 
       def initialize
-        @machines = {}
+        @machines = []
       end
 
       def add(config)
-        @config = config
-
-        objectify
+        objectify(config)
       end
 
-      def objectify
-        @config.each do |hostname, data|
-          @machines[hostname] = Machine.new(data)
+      def objectify(config)
+        config.each do |identifier, data|
+          @machines.push Machine.new(identifier, data)
         end
       end
 
-      def to_hash
-        { :machines => machines }
-      end
-
-      # associate each machine interface MAC address with a switch port
       def combine_data(switches)
         switches
       end
 
-      alias_method :inspect, :to_hash
-      alias_method :to_s, :to_hash
+      def each
+        @machines.each { |machine| yield machine }
+      end
+
+      def [](n)
+        @machines[n]
+      end
     end
   end
 end

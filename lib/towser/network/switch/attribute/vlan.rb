@@ -5,22 +5,20 @@ module Towser
     class Switch
       module Attribute
         class Vlan
-          attr_accessor :vlan, :macs
+          attr_accessor :identifier, :macs
 
-          def initialize(vlan, macs)
-            @vlan = vlan.to_i
-            @macs = macs
+          def initialize(identifier, data)
+            @identifier = identifier.to_i
+
+            objectify(data)
           end
 
-          def to_hash
-            {
-              :vlan => vlan,
-              :macs => macs.to_hash,
-            }
+          def objectify(data)
+            data.each do |mac, mode|
+              @macs ||= []
+              @macs.push({ :mac => mac, :mode => mode })
+            end
           end
-
-          alias_method :inspect, :to_hash
-          alias_method :to_s, :to_hash
         end
       end
     end

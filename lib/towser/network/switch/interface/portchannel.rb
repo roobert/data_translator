@@ -13,18 +13,6 @@ module Towser
             @channel     = interface[:channel]
             @switchport  = Towser::Network::Switch::Interface::Attribute::Switchport.new(interface[:switchport])
           end
-
-          def to_hash
-            {
-              :identifier  => identifier,
-              :description => description,
-              :channel     => channel,
-              :switchport  => switchport.to_hash,
-            }
-          end
-
-          alias_method :inspect, :to_hash
-          alias_method :to_s, :to_hash
         end
       end
     end

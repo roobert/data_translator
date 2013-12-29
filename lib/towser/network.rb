@@ -4,7 +4,8 @@ module Towser
   class Network
     attr_accessor :switches, :machines
 
-    def initialize
+    def initialize(identifier)
+      @identifier = identifier
       @switches = Switches.new
       @machines = Machines.new
     end
@@ -22,20 +23,25 @@ module Towser
       mac.downcase.gsub(/[^0-9a-zA-Z]*/, '')
     end
 
-    def associate_switch_port_mac_addresses_with_machine_interfaces
-      @switches.switches.each do |switch_identifier, switch|
+    # these two tasks are essentially 'combine_machine_data' so maybe they should be moved?
 
-        switch.config.ethernet_interfaces.each do |interface_identifier, interface|
+    def associate_switch_port_mac_addresses_with_machine_interfaces
+      @switches.each do |switch|
+
+        switch.config.ethernet_interfaces.each do |interface|
 
           next if interface.switchport.nil?
           next if interface.switchport.added.nil?
 
-          interface.switchport.added.each do |vlan, vlans|
+          interface.switchport.added.each do |vlans|
 
-            vlans.macs.each do |mac, mode|
-              machine = find_machine_by_mac(mac)
+            vlans.macs.each do |data|
+
+              machine = find_machine_by_mac(data)
+
               unless machine.nil?
-                vlans.macs[mac] = { :mode => mode, :machine_interface => machine }
+                vlans.macs.each do |mac|
+                end
               end
             end
           end
@@ -47,11 +53,10 @@ module Towser
 
     def associate_machine_interfaces_with_switch_ports
       return if @machines.nil?
-      return if @machines.machines.nil?
 
-      @machines.machines.each do |machine_identifier, machine|
+      @machines.each do |machine|
 
-        machine.interfaces.each do |interface_identifier, interface|
+        machine.interfaces.each do |interface|
           interface.switch_ports = find_switch_ports_by_mac(interface.mac_address)
         end
       end
@@ -77,12 +82,12 @@ module Towser
     end
 
     def find_machine_by_mac(mac)
-      @machines.machines.each do |machine_identifier, machine|
-        machine.interfaces.each do |interface_identifier, interface|
+      @machines.each do | machine|
+        machine.interfaces.each do |interface|
           next if interface.mac_address.nil?
 
-          if normalize_mac(mac) == normalize_mac(interface.mac_address)
-            return { machine_identifier => machine }
+          if normalize_mac(mac[:mac]) == normalize_mac(interface.mac_address)
+            return { machine.identifier => machine }
           end
         end
       end
@@ -101,23 +106,22 @@ module Towser
 
       ports = nil
 
-      @switches.switches.each do |switch_identifier, switch|
+      @switches.each do |switch|
 
-        switch.config.ethernet_interfaces.each do |interface_identifier, interface|
+        switch.config.ethernet_interfaces.each do |interface|
 
           next if interface.switchport.nil?
           next if interface.switchport.added.nil?
 
-          interface.switchport.added.each do |vlan, vlans|
+          interface.switchport.added.vlans.each do |vlan|
 
-            vlans.macs.each do |mac, mode|
-
-              if normalize_mac(mac) == normalize_mac(machine_mac)
-                ports = {} if ports.nil?
-                ports[switch_identifier] ||= {}
-                ports[switch_identifier][interface_identifier] ||= {}
-                ports[switch_identifier][interface_identifier][vlan] ||= { mac => mode }
-              end
+            vlan.macs.each do |data|
+                if normalize_mac(data[:mac]) == normalize_mac(machine_mac)
+                  ports = {} if ports.nil?
+                  ports[switch.identifier] ||= {}
+                  ports[switch.identifier][interface.identifier] ||= {}
+                  ports[switch.identifier][interface.identifier][vlan] ||= data
+                end
             end
           end
         end
@@ -125,15 +129,5 @@ module Towser
 
       ports
     end
-
-    def to_hash
-      {
-        :switches => @switches.to_hash,
-        :machines => @machines.to_hash
-      }
-    end
-
-    alias_method :to_s, :to_hash
-    alias_method :inspect, :to_hash
   end
 end

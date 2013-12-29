@@ -15,16 +15,6 @@ module Towser
             @vlans         = Towser::Network::Switch::Attribute::Vlans.new(entry[:vlans]) unless entry[:vlans].nil?
           end
         end
-
-        def to_hash
-          {
-            :identifier => @identifier,
-            :vlans => @vlans,
-          }
-        end
-
-        alias_method :inspect, :to_hash
-        alias_method :to_s, :to_hash
       end
     end
   end

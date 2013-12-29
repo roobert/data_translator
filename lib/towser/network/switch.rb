@@ -3,8 +3,11 @@
 module Towser
   class Network
     class Switch
-      attr_accessor :config
-      attr_accessor :bridge_address_table
+      attr_accessor :identifier, :config, :bridge_address_table
+
+      def initialize(identifier)
+        @identifier = identifier
+      end
 
       def load_switch_config(config)
         @config = Towser::Network::Switch::Config.new(config)
@@ -14,33 +17,33 @@ module Towser
         @bridge_address_table = Towser::Network::Switch::BridgeAddressTable.new(config)
       end
 
-      # combine switch config and bridge_address_table data
+#<Towser::Network::Switch::Attribute::Vlan:0x000000023ecba8 @identifier=306, @macs=[]>
+#[
+#    [0] #<Towser::Network::Switch::Attribute::Vlan:0x000000023b59f0 @identifier=306, @macs=[{:mac=>"001D.7032.469A", :mode=>"Dynamic"}]>,
+#    [1] #<Towser::Network::Switch::Attribute::Vlan:0x000000023b5720 @identifier=311, @macs=[{:mac=>"001D.7032.469A", :mode=>"Dynamic"}]>
+#]
+
       def combine_data
-        @config.ethernet_interfaces.each do |identifier, interface|
+        @config.ethernet_interfaces.each do |interface|
           if defined?(interface.switchport.added)
 
-            vlans = @bridge_address_table.find_macs_for_port(interface.stack_member, interface.unit, interface.port)
+            bridge_vlan_data = @bridge_address_table.find_macs_for_port(interface.stack_member, interface.unit, interface.port)
 
-            next if vlans.nil?
+            next if bridge_vlan_data.nil?
 
-            interface.switchport.added.vlans.each do |vlan, data|
-              next if data.nil?
-              next if vlans[vlan].nil?
-              data.macs = vlans[vlan].macs
+            # probably much better way to do this would be to merge the bridge vlan config with the switch interface and then raise errors
+            # on any vlans that have no macs or any vlans that exist in the bridge table but not on the interface..
+
+            interface.switchport.added.vlans.each do |vlan|
+              bridge_vlan_data.each do |bridge_vlan|
+                if bridge_vlan.identifier = vlan.identifier
+                  vlan.macs = bridge_vlan.macs
+                end
+              end
             end
           end
         end
       end
-
-      def to_hash
-        {
-          :config => config.to_hash,
-          :bridge_address_table => bridge_address_table.to_hash,
-        }
-      end
-
-      alias_method :inspect, :to_hash
-      alias_method :to_s, :to_hash
     end
   end
 end

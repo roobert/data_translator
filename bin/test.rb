@@ -16,7 +16,7 @@ BRIDGE_TABLE_DIR = File.join(DATA_DIR, 'bridge_address_table')
 switches = ARGV
 machine_config = YAML.load_file(File.join(DATA_DIR, 'network_interfaces.txt'))
 
-network = Network.new
+network = Network.new('bunker')
 
 network.add_switches(switches)
 network.add_machines(machine_config)
@@ -25,4 +25,4 @@ network.add_machines(machine_config)
 #network.associate_machine_interfaces_with_switch_ports
 #network.associate_switch_port_mac_addresses_with_machine_interfaces
 
-puts network.to_hash.to_yaml
+puts network.switches[0].config.ethernet_interfaces.to_yaml

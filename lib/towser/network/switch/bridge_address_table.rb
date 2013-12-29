@@ -27,15 +27,6 @@ module Towser
           end
           return
         end
-
-        def to_hash
-          {
-            :entries => @entries.to_hash
-          }
-        end
-
-        alias_method :inspect, :to_hash
-        alias_method :to_s, :to_hash
       end
     end
   end
