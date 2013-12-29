@@ -9,7 +9,7 @@ module Towser
             attr_reader :mode, :added, :removed, :acceptable_frame_type
 
             def initialize(switchport)
-              @mode    = switchport[:mode]
+              @mode = switchport[:mode]
               unless switchport[:vlans].nil?
                 unless switchport[:vlans][:add].nil?
                   @added = Towser::Network::Switch::Attribute::Vlans.new(switchport[:vlans][:add])
