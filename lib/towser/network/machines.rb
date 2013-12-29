@@ -25,24 +25,6 @@ module Towser
         { :machines => machines }
       end
 
-      def normalize_mac(mac)
-        mac.downcase.gsub(/[^0-9a-zA-Z]*/, '')
-      end
-
-      def find_machine(mac)
-        @machines.each do |hostname, machine|
-          machine.interfaces.each do |interface, interface_data|
-            #puts "no match: #{hostname}: #{normalize_mac(interface_data.mac_address)} == #{normalize_mac(mac)}"
-            if normalize_mac(interface_data.mac_address) == normalize_mac(mac)
-              puts "match found: #{hostname}: #{normalize_mac(interface_data.mac_address)} == #{normalize_mac(mac)}"
-              puts "interface: #{interface}"
-              puts "hostname: #{hostname}"
-              #ap machine
-            end
-          end
-        end
-      end
-
       # associate each machine interface MAC address with a switch port
       def combine_data(switches)
         switches

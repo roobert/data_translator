@@ -32,9 +32,6 @@ module Towser
         end
       end
 
-      def find_port(mac)
-      end
-
       def to_hash
         {
           :config => config.to_hash,

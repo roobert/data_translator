@@ -24,3 +24,12 @@ network.add_machines(machine_config)
 
 #puts network.to_hash.to_yaml
 puts network.to_hash.to_yaml
+
+mac = 'b8ac6f990ede'
+#mac = '00:0c:29:80:0a:51'
+
+# find out where a mac address is visible..
+#puts network.find_switch_ports(mac).to_yaml
+
+ap network.machine('money')
+ap network.machine('stoli')

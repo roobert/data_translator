@@ -25,7 +25,7 @@ module Towser
             def to_hash
               {
                 :mode => mode,
-                :added => added.to_hash,
+                :added => added,
                 :removed => removed,
                 :acceptable_frame_type => acceptable_frame_type,
               }

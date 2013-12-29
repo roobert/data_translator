@@ -16,7 +16,7 @@ module Towser
           end
 
           def each
-            @vlans.each { |x,y | yield x, y }
+            @vlans.each { |vlan,macs| yield vlan, macs }
           end
 
           def to_hash
