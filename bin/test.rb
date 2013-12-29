@@ -22,3 +22,9 @@ network.add_switches(switches)
 network.add_machines(machine_config)
 
 #puts network.to_hash.to_yaml
+#puts network.find_machine_ports('money')
+
+network.associate_machine_interfaces_with_switch_ports
+
+puts network.to_hash.to_yaml
+

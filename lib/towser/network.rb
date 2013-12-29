@@ -22,13 +22,22 @@ module Towser
       mac.downcase.gsub(/[^0-9a-zA-Z]*/, '')
     end
 
+    def associate_machine_interfaces_with_switch_ports
+      return if @machines.nil?
+      return if @machines.machines.nil?
+
+      @machines.machines.each do |machine_identifier, machine|
+
+        machine.interfaces.each do |interface_identifier, interface|
+          interface.switch_ports = find_switch_ports_by_mac(interface.mac_address)
+        end
+      end
+    end
+
     def find_machine_ports(hostname)
       machine = find_machine_by_hostname(hostname)
 
       return if machine.nil?
-
-      #ap machine.class
-      #ap machine
 
       found_ports = {}
 
@@ -36,6 +45,8 @@ module Towser
         ports = find_switch_ports_by_mac(interface.mac_address)
         found_ports[interface_identifier] = ports unless ports.nil?
       end
+
+      ap machine
 
       return nil if found_ports.empty?
       return found_ports
