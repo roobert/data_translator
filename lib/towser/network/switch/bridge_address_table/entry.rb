@@ -18,8 +18,8 @@ module Towser
 
         def to_hash
           {
-            :identifier => identifier,
-            :vlans => vlans,
+            :identifier => @identifier,
+            :vlans => @vlans,
           }
         end
 

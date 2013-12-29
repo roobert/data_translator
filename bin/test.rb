@@ -23,4 +23,4 @@ network.add_switches(switches)
 network.add_machines(machine_config)
 
 #puts network.to_hash.to_yaml
-ap network.to_hash
+puts network.to_hash.to_yaml
