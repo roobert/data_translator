@@ -7,17 +7,12 @@ module Towser
         class Vlan
           attr_accessor :identifier, :macs
 
-          def initialize(identifier, data)
-            @identifier = identifier.to_i
-
-            objectify(data)
+          def initialize(identifier)
+            @identifier = identifier
           end
 
-          def objectify(data)
-            data.each do |mac, mode|
-              @macs ||= []
-              @macs.push({ :mac => mac, :mode => mode })
-            end
+          def add(mac)
+            @macs.push mac
           end
         end
       end

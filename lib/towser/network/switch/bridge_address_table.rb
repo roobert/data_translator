@@ -7,25 +7,15 @@ module Towser
         attr_reader :entries
 
         def initialize(table)
-          @table   = table
-          @entries = {}
+          @entries = []
 
-          self.objectify
+          self.objectify(table)
         end
 
-        def objectify
-          @table.each do |identifier, entry|
-            @entries[identifier] = Towser::Network::Switch::BridgeAddressTable::Entry.new(identifier, entry)
+        def objectify(table)
+          table.each do |identifier, entry|
+            @entries.push Towser::Network::Switch::BridgeAddressTable::Entry.new(identifier, entry)
           end
-        end
-
-        def find_macs_for_port(stack_member, unit, port)
-          entries.each do |identifier, entry|
-            if entry.stack_member == stack_member and entry.unit == unit and entry.port == port
-              return entry.vlans.vlans
-            end
-          end
-          return
         end
       end
     end

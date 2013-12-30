@@ -19,10 +19,6 @@ module Towser
         end
       end
 
-      def combine_data(switches)
-        switches
-      end
-
       def each
         @machines.each { |machine| yield machine }
       end

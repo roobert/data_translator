@@ -5,13 +5,13 @@ module Towser
     class Switch
       module Interface
         class PortChannel
-          attr_reader :identifier, :description, :channel, :switchport
+          attr_reader :identifier, :description, :channel, :switchports
 
           def initialize(identifier, interface)
             @identifier  = identifier
             @description = interface[:description]
             @channel     = interface[:channel]
-            @switchport  = Towser::Network::Switch::Interface::Attribute::Switchport.new(interface[:switchport])
+            @switchports = Towser::Network::Switch::Interface::Attribute::Switchports.new(interface[:switchports])
           end
         end
       end

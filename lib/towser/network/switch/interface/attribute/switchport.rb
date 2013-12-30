@@ -6,20 +6,98 @@ module Towser
       module Interface
         module Attribute
           class Switchport
-            attr_reader :mode, :added, :removed, :acceptable_frame_type
+            attr_reader :mode
 
             def initialize(switchport)
               objectify(switchport)
             end
 
             def objectify(switchport)
-              @mode                  = switchport[:mode]
-              @acceptable_frame_type = switchport[:acceptable_frame_type]
+              @access = Access.new(switchport[:access])   unless switchport[:access].nil?
+              @mode   = switchport[:mode]                 unless switchport[:mode].nil?
+              @trunk  = Trunk.new(switchport[:trunk])     unless switchport[:trunk].nil?
+              @trunk  = General.new(switchport[:general]) unless switchport[:general].nil?
+            end
 
-              return if switchport[:vlans].nil?
+            class Access
+              def initialize(data)
+                @vlans = Towser::Network::Switch::Attribute::Vlans.new(data[:vlans]) unless data[:vlans].nil?
+              end
+            end
 
-              @added   = Towser::Network::Switch::Attribute::Vlans.new(switchport[:vlans][:add]) unless switchport[:vlans][:add].nil?
-              @removed = Towser::Network::Switch::Attribute::Vlans.new(switchport[:vlans][:remove]) unless switchport[:vlans][:remove].nil?
+            class Trunk
+              def initialize(data)
+                @tagged  = Tagged.new(data[:tagged])   unless data[:tagged].nil?
+                @allowed = Allowed.new(data[:allowed]) unless data[:allowed].nil?
+              end
+
+              class Tagged
+                def initialize(data)
+                  @tagged = data unless data.nil?
+                end
+              end
+
+              class Allowed
+                def initialize(data)
+                  unless data[:vlans].nil?
+                    @allowed = Add.new(data[:vlans][:add])       unless data[:vlans][:add].nil?
+                    @allowed = Remove.new(data[:vlans][:remove]) unless data[:vlans][:remove].nil?
+                  end
+                end
+
+                class Add
+                  def initialize(data)
+                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                  end
+                end
+
+                class Remove
+                  def initialize(data)
+                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                  end
+                end
+              end
+            end
+
+            class General
+              def initialize(data)
+                @tagged                = Tagged.new(data[:tagged])                             unless data[:tagged].nil?
+                @allowed               = Allowed.new(data[:allowed])                           unless data[:allowed].nil?
+                @acceptable_frame_type = AcceptableFrameType.new(data[:acceptable_frame_type]) unless data[:acceptable_frame_type].nil?
+              end
+
+              class Tagged
+                def initialize(data)
+                  @tagged = data unless data.nil?
+                end
+              end
+
+              class Allowed
+                def initialize(data)
+                  unless data[:vlans].nil?
+                    @allowed = Add.new(data[:vlans][:add])       unless data[:vlans][:add].nil?
+                    @allowed = Remove.new(data[:vlans][:remove]) unless data[:vlans][:remove].nil?
+                  end
+                end
+
+                class Add
+                  def initialize(data)
+                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                  end
+                end
+
+                class Remove
+                  def initialize(data)
+                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                  end
+                end
+              end
+
+              class AcceptableFrameType
+                def initialize(data)
+                  @acceptable_frame_type = data unless data.nil?
+                end
+              end
             end
           end
         end

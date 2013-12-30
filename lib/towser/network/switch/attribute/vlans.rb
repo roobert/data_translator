@@ -12,9 +12,10 @@ module Towser
           end
 
           def objectify(data)
+            return if data.nil?
             @vlans ||= []
-            data.each do |vlan, macs|
-              @vlans.push Switch::Attribute::Vlan.new(vlan, macs)
+            data.each do |vlan|
+              @vlans.push Switch::Attribute::Vlan.new(vlan)
             end
           end
 

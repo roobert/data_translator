@@ -5,7 +5,7 @@ module Towser
     class Switch
       module Interface
         class Ethernet
-          attr_accessor :identifier, :description, :stack_member, :port, :unit, :switchport
+          attr_accessor :identifier, :description, :stack_member, :port, :unit, :switchports
 
           def initialize(identifier, interface)
             @identifier = identifier
@@ -18,7 +18,7 @@ module Towser
             @stack_member = interface[:stack_member].to_i
             @port         = interface[:port].to_i
             @unit         = interface[:unit]
-            @switchport   = Towser::Network::Switch::Interface::Attribute::Switchport.new(interface[:switchport]) unless interface[:switchport].nil?
+            @switchports  = Towser::Network::Switch::Interface::Attribute::Switchports.new(interface[:switchports]) unless interface[:switchports].nil?
           end
         end
       end
