@@ -6,17 +6,16 @@ module Towser
       module Interface
         module Attribute
           class Switchport
-            attr_reader :mode
 
             def initialize(switchport)
               objectify(switchport)
             end
 
             def objectify(switchport)
-              @access = Access.new(switchport[:access])   unless switchport[:access].nil?
-              @mode   = switchport[:mode]                 unless switchport[:mode].nil?
-              @trunk  = Trunk.new(switchport[:trunk])     unless switchport[:trunk].nil?
-              @trunk  = General.new(switchport[:general]) unless switchport[:general].nil?
+              @access  = Access.new(switchport[:access])   unless switchport[:access].nil?
+              @mode    = switchport[:mode]                 unless switchport[:mode].nil?
+              @trunk   = Trunk.new(switchport[:trunk])     unless switchport[:trunk].nil?
+              @general = General.new(switchport[:general]) unless switchport[:general].nil?
             end
 
             class Access

@@ -15,7 +15,6 @@ module Towser
             @ip_addresses     = data[:ip_addresses]
             @slaves           = data[:slaves]
             @active_in_bond   = data[:active_in_bond]
-            @switch_ports     = nil
           end
         end
       end
