@@ -7,7 +7,7 @@ require 'towser'
 require 'awesome_print'
 require 'yaml'
 
-include Towser
+include NetworkDataTranslator
 
 DATA_DIR         = File.join(File.dirname(__FILE__), '../data')
 CONFIG_DIR       = File.join(DATA_DIR, 'config')
