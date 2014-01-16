@@ -17,6 +17,10 @@ module Towser
             @entries.push Towser::Network::Switch::BridgeAddressTable::Entry.new(identifier, entry)
           end
         end
+
+        def each
+          @entries.each { |entry| yield entry }
+        end
       end
     end
   end

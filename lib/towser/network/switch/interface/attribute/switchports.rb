@@ -18,6 +18,10 @@ module Towser
                 @switchports.push Towser::Network::Switch::Interface::Attribute::Switchport.new(switchport)
               end
             end
+
+            def each
+              @switchports.each { |switchport| yield switchport }
+            end
           end
         end
       end

@@ -2,7 +2,7 @@
 
 module Towser
   class Network
-    attr_accessor :switches, :machines
+    attr_accessor :identifier, :switches, :machines
 
     def initialize(identifier)
       @identifier = identifier

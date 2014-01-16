@@ -1,3 +1,4 @@
+
 * add snmp data parser
 * improve mcollective rpc plugin
 * work out a better way to pass in data to network
@@ -16,6 +17,3 @@
 * create 'views' of data in object model..
 
 * mac addresses sometimes quoted?
-
-Towser = model of the data (backend)
-blah = frontend, views of the data.. e.g: load the data model into memory and then create helpers to do lookups on the data set to resolve stuff, etc.

@@ -7,12 +7,9 @@ module Towser
         class Vlan
           attr_accessor :identifier, :macs
 
-          def initialize(identifier)
-            @identifier = identifier
-          end
-
-          def add(mac)
-            @macs.push mac
+          def initialize(vlan, macs)
+            @identifier = vlan
+            @macs       = macs
           end
         end
       end
