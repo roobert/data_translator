@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     class Switch
       class BridgeAddressTable
@@ -12,7 +12,7 @@ module Towser
             @port          = entry[:port].to_i
             @unit          = entry[:unit]
             @stack_member  = entry[:stack_member].to_i
-            @vlans         = Towser::Network::Switch::Attribute::Vlans.new(entry[:vlans]) unless entry[:vlans].nil?
+            @vlans         = NetworkDataTranslator::Network::Switch::Attribute::Vlans.new(entry[:vlans]) unless entry[:vlans].nil?
           end
         end
       end

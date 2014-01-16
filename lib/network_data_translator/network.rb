@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     attr_accessor :identifier, :switches, :machines
 

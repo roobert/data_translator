@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     class Switches
       attr_reader :switches
@@ -18,7 +18,7 @@ module Towser
       end
 
       def add(host)
-        @switches.push Towser::Network::Switch.new(host)
+        @switches.push NetworkDataTranslator::Network::Switch.new(host)
       end
     end
   end

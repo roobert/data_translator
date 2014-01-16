@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     class Switch
       class Config
@@ -21,17 +21,17 @@ module Towser
 
             when :ethernet
               interfaces.each do |identifier, interface|
-                @ethernet_interfaces.push Towser::Network::Switch::Interface::Ethernet.new(identifier, interface)
+                @ethernet_interfaces.push NetworkDataTranslator::Network::Switch::Interface::Ethernet.new(identifier, interface)
               end
 
             when :vlan
               interfaces.each do |identifier, interface|
-                @vlan_interfaces.push Towser::Network::Switch::Interface::Vlan.new(identifier, interface)
+                @vlan_interfaces.push NetworkDataTranslator::Network::Switch::Interface::Vlan.new(identifier, interface)
               end
 
             when :port_channel
               interfaces.each do |identifier, interface|
-                @port_channel_interfaces.push Towser::Network::Switch::Interface::PortChannel.new(identifier, interface)
+                @port_channel_interfaces.push NetworkDataTranslator::Network::Switch::Interface::PortChannel.new(identifier, interface)
               end
 
             else

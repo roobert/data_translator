@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     class Switch
       class BridgeAddressTable
@@ -14,7 +14,7 @@ module Towser
 
         def objectify(table)
           table.each do |identifier, entry|
-            @entries.push Towser::Network::Switch::BridgeAddressTable::Entry.new(identifier, entry)
+            @entries.push NetworkDataTranslator::Network::Switch::BridgeAddressTable::Entry.new(identifier, entry)
           end
         end
 

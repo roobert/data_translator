@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     class Switch
       module Interface
@@ -15,7 +15,7 @@ module Towser
 
             def objectify(switchports)
               switchports.each do |switchport|
-                @switchports.push Towser::Network::Switch::Interface::Attribute::Switchport.new(switchport)
+                @switchports.push NetworkDataTranslator::Network::Switch::Interface::Attribute::Switchport.new(switchport)
               end
             end
 

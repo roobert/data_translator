@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     class Switch
       module Interface
@@ -11,7 +11,7 @@ module Towser
             @identifier  = identifier
             @description = interface[:description]
             @channel     = interface[:channel]
-            @switchports = Towser::Network::Switch::Interface::Attribute::Switchports.new(interface[:switchports])
+            @switchports = NetworkDataTranslator::Network::Switch::Interface::Attribute::Switchports.new(interface[:switchports])
           end
         end
       end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module Towser
+module NetworkDataTranslator
   class Network
     class Switch
       module Interface
@@ -28,7 +28,7 @@ module Towser
               def initialize(data)
                 @vlans = nil
 
-                @vlans = Towser::Network::Switch::Attribute::Vlans.new(data[:vlans]) unless data[:vlans].nil?
+                @vlans = NetworkDataTranslator::Network::Switch::Attribute::Vlans.new(data[:vlans]) unless data[:vlans].nil?
               end
             end
 
@@ -70,7 +70,7 @@ module Towser
                   def initialize(data)
                     @vlans = nil
 
-                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                    @vlans = NetworkDataTranslator::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
                   end
                 end
 
@@ -80,7 +80,7 @@ module Towser
                   def initialize(data)
                     @vlans = nil
 
-                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                    @vlans = NetworkDataTranslator::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
                   end
                 end
               end
@@ -133,7 +133,7 @@ module Towser
                   def initialize(data)
                     @vlans = nil
 
-                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                    @vlans = NetworkDataTranslator::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
                   end
                 end
 
@@ -141,7 +141,7 @@ module Towser
                   def initialize(data)
                     @vlans = nil
 
-                    @vlans = Towser::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
+                    @vlans = NetworkDataTranslator::Network::Switch::Attribute::Vlans.new(data) unless data.nil?
                   end
                 end
               end
