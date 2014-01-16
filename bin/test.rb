@@ -3,7 +3,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '../lib'))
 
 require 'switch_data_parser'
-require 'towser'
+require 'network_data_translator'
 require 'awesome_print'
 require 'yaml'
 
