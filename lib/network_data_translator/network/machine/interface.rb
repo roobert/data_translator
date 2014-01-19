@@ -9,12 +9,12 @@ module NetworkDataTranslator
 
           def initialize(identifier, data)
             @identifier       = identifier
-            @mac_address      = data[:mac_address]
-            @member           = data[:member]
-            @active_interface = data[:active_interface]
-            @ip_addresses     = data[:ip_addresses]
-            @slaves           = data[:slaves]
-            @active_in_bond   = data[:active_in_bond]
+            @mac_address      = data['mac_address']
+            @member           = data['member']
+            @active_interface = data['active_interface']
+            @ip_addresses     = data['ip_addresses']
+            @slaves           = data['slaves']
+            @active_in_bond   = data['active_in_bond']
           end
         end
       end
