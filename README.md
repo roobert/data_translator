@@ -4,6 +4,8 @@
 
 Translates and combines switch and machine data from hash form to ruby objects.
 
+note: maybe convert to use this? https://github.com/lassebunk/dish
+
 ## Dependencies
 
 Possibly depends on the following:
